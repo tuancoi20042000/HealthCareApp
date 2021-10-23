@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthCareApp">
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".ErrorActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".CartActivity" />
         <activity
             android:name=".OrderDetailActivity"
             android:label="@string/title_activity_order_detail"
