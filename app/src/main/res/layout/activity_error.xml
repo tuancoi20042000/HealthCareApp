@@ -48,7 +48,7 @@
         android:id="@+id/nav_bottom"
         android:layout_width="412dp"
         android:layout_height="60dp"
-        app:itemBackground="#2196F3"
+        android:background="#2196F3"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
         app:layout_constraintBottom_toBottomOf="parent"
