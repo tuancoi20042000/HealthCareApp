@@ -9,7 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthCareApp">
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".DempFireBaseActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".ErrorActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".CartActivity" />
         <activity
             android:name=".OrderDetailActivity"
             android:label="@string/title_activity_order_detail"
@@ -17,13 +32,7 @@
         <activity android:name=".ListOrderActivity" />
         <activity android:name=".ListItem_SearchActivity" />
         <activity android:name=".ItemDetailActivity" />
-        <activity android:name=".ListItemActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ListItemActivity" />
     </application>
 
 </manifest>
