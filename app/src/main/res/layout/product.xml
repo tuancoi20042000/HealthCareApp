@@ -6,8 +6,9 @@
     android:layout_width="wrap_content"
     app:cardCornerRadius="10dp"
     android:elevation="5dp"
-    android:layout_marginLeft="15dp"
+    android:layout_margin="10dp"
     android:backgroundTint="#F6F6F6"
+    android:id="@+id/product"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,33 +17,36 @@
 
 
         <ImageView
-            android:id="@+id/food_image"
-            android:layout_width="179dp"
-            android:layout_height="180dp"
+            android:id="@+id/pImage"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
             android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/banggau" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/pName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:fontFamily="@font/semibold"
-            android:text="Float Cake Vietnam"
+            android:text="Băng go"
             android:textColor="#091020"
-            android:textSize="16sp"
+            android:textSize="14dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/price"
+            app:layout_constraintEnd_toStartOf="@+id/pPrice"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/food_image" />
+            app:layout_constraintTop_toBottomOf="@+id/pImage"
+            app:layout_constraintVertical_bias="0.411" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/pPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
@@ -50,10 +54,11 @@
             android:fontFamily="@font/semibold"
             android:text="$6.05"
             android:textColor="#FF6813"
-            android:textSize="14sp"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/pName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/name"
-            app:layout_constraintTop_toTopOf="@+id/name" />
+            app:layout_constraintStart_toEndOf="@+id/pName"
+            app:layout_constraintTop_toTopOf="@+id/pName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
