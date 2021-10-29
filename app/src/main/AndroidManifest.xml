@@ -13,16 +13,16 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.HealthCareApp">
-        <activity android:name=".ChatBotActivity">
+        <activity android:name=".ChatBotActivity"/>
+        <activity android:name=".DempFireBaseActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DempFireBaseActivity"></activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SplashActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".ErrorActivity" />
