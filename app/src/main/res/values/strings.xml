@@ -14,5 +14,9 @@
 
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
+<!--    my account-->
+<!--    <string name="google_map_key">AIzaSyC_6blrudXcNvbUGDO8h-m8RSgUJ4FmlcM</string>-->
+<!--    FPT account-->
+    <string name="google_map_key">AIzaSyB5-0DvWp2x8CBKOCi0guY6EWCXXyhPwJ4</string>
 
 </resources>

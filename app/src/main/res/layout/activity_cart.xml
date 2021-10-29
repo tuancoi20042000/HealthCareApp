@@ -45,8 +45,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
-<<<<<<< HEAD
-=======
 
->>>>>>> 1e7732806df56bfd31d0d3a8a379594694374d5c
 </LinearLayout>

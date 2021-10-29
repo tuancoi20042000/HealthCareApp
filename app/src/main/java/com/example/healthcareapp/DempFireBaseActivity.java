@@ -74,7 +74,7 @@ public class DempFireBaseActivity extends AppCompatActivity {
                             List<Item> list = new ArrayList<>();
                             for(QueryDocumentSnapshot doc: snapshot){
                                 Item item = new Item();
-                                item.setName(doc.getID().toString());
+                                item.setName(doc.getId().toString());
                                 item.setQuantity(Integer.parseInt(doc.get("quantity").toString()));
                                 list.add(item);
                             }
