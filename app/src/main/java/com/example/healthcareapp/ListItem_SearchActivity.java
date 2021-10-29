@@ -1,7 +1,6 @@
 package com.example.healthcareapp;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +48,7 @@ public class ListItem_SearchActivity extends AppCompatActivity {
         btSortSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onClickSort();
+                onClickSort();
             }
         });
         editTextSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -62,61 +61,47 @@ public class ListItem_SearchActivity extends AppCompatActivity {
         btBackShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               onClickBack();
+
+                onBackPressed();
             }
         });
 
     }
-    public void onClickBack(){
-        Intent intent = new Intent(ListItem_SearchActivity.this, ListItemActivity.class);
-        startActivity(intent);
-    }
-    public void onClickSort(){
+
+    public void onClickSort() {
         Collections.sort(list);
         productAdapter.setmListProduct(list);
         recyclerViewSearch.setAdapter(productAdapter);
-        Toast.makeText(ListItem_SearchActivity.this,"Sort",Toast.LENGTH_SHORT).show();
+        Toast.makeText(ListItem_SearchActivity.this, "Sort", Toast.LENGTH_SHORT).show();
     }
+
     @SuppressLint("ResourceAsColor")
-    public void onFocusChangeText(){
-            if(editTextSearch.getText().toString().isEmpty()){
-                txtTextSearch.setText("");
-                list = getListProduct();
-            }
-            else {
-                txtTextSearch.setText("'"+editTextSearch.getText()+"'");
-                List<Product> listSearch = new ArrayList<>();
-                for(Product p :getListProduct()){
-                    if(p.getpName().contains(editTextSearch.getText())){
-                        listSearch.add(p);
-                    }
-                }
-                if(listSearch.size()==0){
-                    txtTextSearch.setText("'Không có sản phẩm nào'");
-                    txtTextSearch.setTextColor(Color.RED);
-                }
-                else {
-                    txtTextSearch.setTextColor(Color.parseColor("#AEA7A7"));
-                    list = listSearch;
+    public void onFocusChangeText() {
+        List<Product> listSearch = new ArrayList<>();
+        if (editTextSearch.getText().toString().isEmpty()) {
+            txtTextSearch.setText("");
+            listSearch = getListProduct();
+        } else {
+            txtTextSearch.setText("'" + editTextSearch.getText() + "'");
+            for (Product p : getListProduct()) {
+                if (p.getpName().contains(editTextSearch.getText())) {
+                    listSearch.add(p);
                 }
             }
-            productAdapter.setmListProduct(list);
-            recyclerViewSearch.setAdapter(productAdapter);
+            if (listSearch.size() == 0) {
+                txtTextSearch.setText("'Không có sản phẩm nào'");
+                txtTextSearch.setTextColor(Color.RED);
+            } else {
+                txtTextSearch.setTextColor(Color.parseColor("#AEA7A7"));
+            }
+        }
+        productAdapter.setmListProduct(listSearch);
+        recyclerViewSearch.setAdapter(productAdapter);
     }
+
     public List<Product> getListProduct() {
         List<Product> lista = new ArrayList<>();
-        lista.add(new Product("Băng gâu 3", 20, R.drawable.banggau + ""));
-        lista.add(new Product("Bang gau 2", 21, R.drawable.mask5_large + ""));
-        lista.add(new Product("Bang gau 3", 9, R.drawable.banggau + ""));
-        lista.add(new Product("Băng gâu 3", 20, R.drawable.banggau + ""));
-        lista.add(new Product("Bang gau 2", 1, R.drawable.mask5_large + ""));
-        lista.add(new Product("Bang gau 3", 9, R.drawable.banggau + ""));
-        lista.add(new Product("Băng gâu 3", 20, R.drawable.banggau + ""));
-        lista.add(new Product("Bang gau 2", 21, R.drawable.mask5_large + ""));
-        lista.add(new Product("Bang gau 3", 9, R.drawable.banggau + ""));
-        lista.add(new Product("Băng gâu 3", 20, R.drawable.banggau + ""));
-        lista.add(new Product("Bang gau 2", 20, R.drawable.mask5_large + ""));
-        lista.add(new Product("Bang gau 3", 9, R.drawable.banggau + ""));
+        lista = (List<Product>) getIntent().getSerializableExtra("list");
         return lista;
     }
 }

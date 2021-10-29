@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -69,13 +68,13 @@
             android:id="@+id/detailQuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/semibold"
             android:text="375"
             android:textColor="#272670"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.774"
+            app:layout_constraintHorizontal_bias="0.944"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailImage" />
 
@@ -106,13 +105,13 @@
 
         <TextView
             android:id="@+id/detailName"
-            android:layout_width="wrap_content"
+            android:layout_width="266dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/semibold"
             android:text="First-aid Bandage"
             android:textColor="#091020"
-            android:textSize="24sp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -120,26 +119,13 @@
             android:id="@+id/imageView9"
             android:layout_width="40dp"
             android:layout_height="52dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/detailImage"
             app:srcCompat="@drawable/tagfree" />
 
-        <TextView
-            android:id="@+id/detailDes"
-            android:layout_width="374dp"
-            android:layout_height="153dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:lineSpacingExtra="2dp"
-            android:text="ĐẶC ĐIỂM NỔI BẬT \n
-Chống nhiễm trùng các vết thương.Những miếng băng cá nhân này ít thấm nước và có độ dính cao.Thiết kế rất đơn giản và tiện dụng Mỗi miếng băng được đặt trong một bao riêng, khi cần chỉ cần bóc lớp vỏ bọc, tách một mặt ra và dán vào vết thương và xong, thật đơn giản và dễ dùng."
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailName" />
 
         <ImageView
             android:id="@+id/btSubtract"
@@ -159,14 +145,14 @@ Chống nhiễm trùng các vết thương.Những miếng băng cá nhân này 
             android:id="@+id/textViewNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:fontFamily="@font/semibold"
             android:text="1"
             android:textColor="#272670"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/btSubtract"
             app:layout_constraintStart_toEndOf="@+id/btSubtract"
-            app:layout_constraintTop_toTopOf="@+id/btSubtract"
-            android:layout_marginLeft="4dp" />
+            app:layout_constraintTop_toTopOf="@+id/btSubtract" />
 
         <ImageView
             android:id="@+id/btAdd"
@@ -184,14 +170,14 @@ Chống nhiễm trùng các vết thương.Những miếng băng cá nhân này 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:fontFamily="@font/semibold"
             android:text="$5.78"
             android:textColor="#272670"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/btAdd"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btAdd"
-            android:layout_marginRight="16dp" />
+            app:layout_constraintTop_toTopOf="@+id/btAdd" />
 
         <ImageView
             android:id="@+id/btAddtoCart"
@@ -204,5 +190,35 @@ Chống nhiễm trùng các vết thương.Những miếng băng cá nhân này 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:layout_width="370dp"
+            android:layout_height="160dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.39"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.725">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/detailDes"
+                    android:layout_width="365dp"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:padding="15dp"
+                    android:text="ĐẶC ĐIỂM NỔI BẬT \n
+Chống nhiễm trùng các vết thương.Những miếng băng cá nhân này ít thấm nước và có độ dính cao.Thiết kế rất đơn giản và tiện dụng Mỗi miếng băng được đặt trong một bao riêng, khi cần chỉ cần bóc lớp vỏ bọc, tách một mặt ra và dán vào vết thương và xong, thật đơn giản và dễ dùng."
+                    tools:layout_editor_absoluteX="14dp"
+                    tools:layout_editor_absoluteY="386dp" />
+            </LinearLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

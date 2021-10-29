@@ -16,33 +16,71 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.healthcareapp.adapter.ProductAdapter;
 import com.example.healthcareapp.adapter.TopProductAdapter;
 import com.example.healthcareapp.model.Product;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.example.healthcareapp.ItemDetailActivity.NUM_TO_TOP_ORDER;
 
 public class ListItemActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private RecyclerView recyclerView2;
     private TopProductAdapter productAdapter2;
-    BottomNavigationView bottomNavigationView;
-    ImageView btSort;
+    private BottomNavigationView bottomNavigationView;
+    private ImageView btSort;
+    private FirebaseFirestore firestore;
+    private CollectionReference reference;
+    private List<Product> list = new ArrayList<>();
+    private List<Product> listTopOrder = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_item);
+        firestore = FirebaseFirestore.getInstance();
+        reference = firestore.collection("Product");
         initView();
-        productAdapter.setmListProduct(getListProduct());
-        recyclerView.setAdapter(productAdapter);
-        //load top product
-        productAdapter2.setmListProduct(getListProduct().subList(0,6));
-        recyclerView2.setAdapter(productAdapter2);
+
+        reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    QuerySnapshot snapshot = task.getResult();
+                    for (QueryDocumentSnapshot doc : snapshot) {
+                        Product p = new Product();
+                        p.setpID(doc.getId().toString());
+                        p.setpName(doc.get("name").toString());
+                        p.setpImage(doc.get("image").toString());
+                        p.setpDescription(doc.get("descrip").toString());
+                        p.setpPrice(Float.parseFloat(doc.get("price").toString()));
+                        p.setpQuantity(Integer.parseInt(doc.get("quantity").toString()));
+                        list.add(p);
+                        if (p.getpQuantity() > NUM_TO_TOP_ORDER) {
+                            listTopOrder.add(p);
+                        }
+                    }
+                    productAdapter.setmListProduct(list);
+                    recyclerView.setAdapter(productAdapter);
+                    productAdapter2.setmListProduct(listTopOrder);
+                    recyclerView2.setAdapter(productAdapter2);
+                }
+            }
+        });
 
 
     }
-    public void initView(){
+
+    public void initView() {
         btSort = findViewById(R.id.btSort);
         // list product
         recyclerView = findViewById(R.id.listProduct);
@@ -52,7 +90,7 @@ public class ListItemActivity extends AppCompatActivity {
         // list top product
         recyclerView2 = findViewById(R.id.listTopOrder);
         productAdapter2 = new TopProductAdapter(this);
-        LinearLayoutManager linearLayout = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(linearLayout);
         // Bottom navigation
         bottomNavigationView = (BottomNavigationView)
@@ -63,13 +101,14 @@ public class ListItemActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_home:
-                                Toast.makeText(ListItemActivity.this,"Home",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListItemActivity.this, "Home", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.action_cart:
-                                Toast.makeText(ListItemActivity.this,"Cart",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListItemActivity.this, "Cart", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.action_search:
-                                Intent intent = new Intent(ListItemActivity.this,ListItem_SearchActivity.class);
+                                Intent intent = new Intent(ListItemActivity.this, ListItem_SearchActivity.class);
+                                intent.putExtra("list", (Serializable) list);
                                 startActivity(intent);
                                 break;
                         }
@@ -77,26 +116,11 @@ public class ListItemActivity extends AppCompatActivity {
                     }
                 });
     }
-    public   List<Product> getListProduct(){
-        List<Product> list = new ArrayList<>();
-        list.add(new Product("Băng gâu 3", 20,R.drawable.banggau+""));
-        list.add(new Product("Bang gau 2", 21,R.drawable.mask5_large+""));
-        list.add(new Product("Bang gau 3", 9,R.drawable.banggau+""));
-        list.add(new Product("Băng gâu 3", 20,R.drawable.banggau+""));
-        list.add(new Product("Bang gau 2", 21,R.drawable.mask5_large+""));
-        list.add(new Product("Bang gau 3", 9,R.drawable.banggau+""));
-        list.add(new Product("Băng gâu 3", 20,R.drawable.banggau+""));
-        list.add(new Product("Bang gau 2", 21,R.drawable.mask5_large+""));
-        list.add(new Product("Bang gau 3", 9,R.drawable.banggau+""));
-        list.add(new Product("Băng gâu 3", 20,R.drawable.banggau+""));
-        list.add(new Product("Bang gau 2", 21,R.drawable.mask5_large+""));
-        list.add(new Product("Bang gau 3", 9,R.drawable.banggau+""));
-        return list;
-    }
-    public void onClickSort(View view){
-        ArrayList<Product> sortList = (ArrayList<Product>) getListProduct();
-        Collections.sort(sortList);
-        productAdapter.setmListProduct(sortList);
+
+
+    public void onClickSort(View view) {
+        Collections.sort(list);
+        productAdapter.setmListProduct(list);
         recyclerView.setAdapter(productAdapter);
     }
 }

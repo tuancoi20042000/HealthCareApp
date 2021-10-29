@@ -46,12 +46,10 @@ public class TopProductAdapter extends RecyclerView.Adapter<TopProductAdapter.Pr
             return;
         }
         //holder.pImage.setImageResource(product.getpImage());
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(product.getpImage(), "drawable", holder.itemView.getContext().getPackageName());
-
         Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
+                .load(product.getpImage())
                 .into(holder.pImage);
-        holder.pName.setText(product.getpName());
+        holder.pName.setText(product.getpName().substring(0,12));
         holder.pPrice.setText("$"+product.getpPrice());
     }
 

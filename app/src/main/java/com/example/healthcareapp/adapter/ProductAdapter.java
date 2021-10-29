@@ -47,13 +47,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         if(product==null){
             return;
         }
-        //holder.pImage.setImageResource(product.getpImage());
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(product.getpImage(), "drawable", holder.itemView.getContext().getPackageName());
-
         Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
+                .load(product.getpImage())
                 .into(holder.pImage);
-        holder.pName.setText(product.getpName());
+        if(product.getpName().length()>15) {
+            holder.pName.setText(product.getpName().substring(0, 15));
+        }
+        else {
+            holder.pName.setText(product.getpName());
+        }
         holder.pPrice.setText("$"+product.getpPrice());
     }
 
