@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/item_home"
+            android:title="@string/navigation_Home"
+            android:icon="@drawable/ic_home"/>
+    </group>
+
+    <item android:title="@string/navigation_Account">
+        <menu>
+            <item android:id="@+id/item_profile"
+                android:title="@string/navigation_Profile"
+                android:icon="@drawable/ic_profile"/>
+            <item android:id="@+id/item_call"
+                android:title="@string/navigation_Call"
+                android:icon="@drawable/ic_phone"/>
+        </menu>
+
+    </item>
+</menu>

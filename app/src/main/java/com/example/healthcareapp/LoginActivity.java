@@ -80,8 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             if(document.getString("Email").equals(email) && (document.getString("PassWord").equals(passWord))){
-                                                //Toast.makeText(LoginActivity.this,"Acc:"+document.getString("Email"),Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(LoginActivity.this,ListItemActivity.class);
+                                                Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
 
                                                 Users users = new Users(document.getId(),document.getString("Email"),document.getString("Avatar"));
                                                 DataLocalManager.setUser(users);

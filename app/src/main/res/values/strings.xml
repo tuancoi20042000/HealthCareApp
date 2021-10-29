@@ -13,6 +13,13 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
+    <string name="login_password_hint">Mật khẩu</string>
+    <string name="navigation_Home">Home</string>
+    <string name="navigation_Account">Account</string>
+    <string name="navigation_Profile">My Profile</string>
+    <string name="navigation_Call">Khẩn Cấp</string>
+    <string name="navigation_Login">Đăng Nhập</string>
 
+    <string name="navigation_Drawer_Open">Open Navigation Drawer</string>
+    <string name="navigation_Drawer_Close">Close Navigation Drawer</string>
 </resources>
