@@ -40,6 +40,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/activity_navigation"
-        app:menu="@menu/menu_navigation" />
+        app:menu="@menu/menu_navigation1" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
