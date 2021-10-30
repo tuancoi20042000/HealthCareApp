@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".MyApplication"
@@ -15,18 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthCareApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".ChatBotActivity" />
-        <activity android:name=".DempFireBaseActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".SplashActivity">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC_6blrudXcNvbUGDO8h-m8RSgUJ4FmlcM"/>
+
+
+        <activity
+            android:name=".Map"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ChatBotActivity" />
+        <activity android:name=".DempFireBaseActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity android:name=".SplashActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".ErrorActivity" />
         <activity android:name=".HomeActivity" />
