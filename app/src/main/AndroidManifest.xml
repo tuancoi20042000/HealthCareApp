@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -11,10 +13,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.HealthCareApp">
-        <activity android:name=".ChatBotActivity"/>
-        <activity android:name=".DempFireBaseActivity"></activity>
+        android:theme="@style/Theme.HealthCareApp"
+        android:usesCleartextTraffic="true">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC_6blrudXcNvbUGDO8h-m8RSgUJ4FmlcM"/>
+
+
+        <activity
+            android:name=".Map"
+            android:exported="true" />
+        <activity android:name=".ChatBotActivity" />
+        <activity android:name=".DempFireBaseActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -35,9 +45,7 @@
         <activity android:name=".ListOrderActivity" />
         <activity android:name=".ListItem_SearchActivity" />
         <activity android:name=".ItemDetailActivity" />
-        <activity android:name=".ListItemActivity">
-
-        </activity>
+        <activity android:name=".ListItemActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
