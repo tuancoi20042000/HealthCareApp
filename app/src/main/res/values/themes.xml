@@ -21,8 +21,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.HealthCareApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-    </style>
+<!--    <style name="Theme.HealthCareApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >-->
+<!--        <item name="colorPrimary">#FF1100</item>-->
 
-    <style name="Theme.HealthCareApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+<!--    </style>-->
+
+<!--    <style name="Theme.HealthCareApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >-->
+<!--        <item name="colorPrimary">#FF1100</item>-->
+<!--    </style>-->
 </resources>

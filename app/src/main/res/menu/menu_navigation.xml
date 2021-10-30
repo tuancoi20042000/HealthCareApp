@@ -3,17 +3,20 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/item_home"
             android:title="@string/navigation_Home"
-            android:icon="@drawable/ic_home"/>
+            android:icon="@drawable/ic_baseline_home_24"/>
     </group>
 
     <item android:title="@string/navigation_Account">
         <menu>
             <item android:id="@+id/item_profile"
                 android:title="@string/navigation_Profile"
-                android:icon="@drawable/ic_profile"/>
-            <item android:id="@+id/item_call"
-                android:title="@string/navigation_Call"
-                android:icon="@drawable/ic_phone"/>
+                android:icon="@drawable/ic_baseline_person_24"/>
+            <item android:id="@+id/item_info"
+                android:title="@string/navigation_About_us"
+                android:icon="@drawable/ic_baseline_info_24"/>
+            <item android:id="@+id/item_logout"
+                android:title="Đăng xuất"
+                android:icon="@drawable/ic_baseline_logout_24"/>
         </menu>
 
     </item>

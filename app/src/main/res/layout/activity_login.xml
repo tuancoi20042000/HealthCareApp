@@ -57,7 +57,7 @@
                 android:id="@+id/btn_login"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="#C53328"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
                 android:text="Đăng nhập"

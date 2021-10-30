@@ -51,6 +51,14 @@ public class ListItemActivity extends AppCompatActivity {
         reference = firestore.collection("Product");
         initView();
 
+        findViewById(R.id.action_home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListItemActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
