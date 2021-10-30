@@ -1,5 +1,6 @@
 package com.example.healthcareapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Users users = DataLocalManager.getUsers();
+
         if(users !=null){
             setContentView(R.layout.activity_home);
             navigationView = findViewById(R.id.navigationView);
@@ -47,7 +50,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-
             drawerLayout = findViewById(R.id.drawLayout);
 
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_Drawer_Open, R.string.navigation_Drawer_Close);
@@ -59,6 +61,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             replaceActivity(new FragmentHome());
             navigationView.getMenu().findItem(R.id.item_home).setChecked(true);
+
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         }else{
@@ -81,6 +85,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             replaceActivity(new FragmentHome());
             navigationView.getMenu().findItem(R.id.item_home).setChecked(true);
 
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         }
 
@@ -107,16 +112,30 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(HomeActivity.this, "Hãy đăng nhập để xem thông tin", Toast.LENGTH_SHORT).show();
             }
 
-
-
-        } else if (id == R.id.item_call) {
-            Intent intent2 = new Intent(Intent.ACTION_DIAL);
-            intent2.setData(Uri.parse("tel:115"));
-            startActivity(intent2);
+        } else if (id == R.id.item_info) {
+            Intent intent = new Intent(HomeActivity.this, ContactActivity.class);
+            startActivity(intent);
         }else if(id == R.id.item_Login){
             Intent intent3 = new Intent(HomeActivity.this,LoginActivity.class);
             startActivity(intent3);
             finish();
+        }else if(id == R.id.item_logout){
+            AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Đăng Xuất")
+                    .setMessage("Xác Nhận Đăng Xuất?")
+                    .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {
+                        }
+                    })
+                    .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {
+                            DataLocalManager.getInstance().myShareReference.putStringValue("fieldName","");
+                            Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).show();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

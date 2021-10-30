@@ -14,10 +14,10 @@
 
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Mật khẩu</string>
-    <string name="navigation_Home">Home</string>
-    <string name="navigation_Account">Account</string>
-    <string name="navigation_Profile">My Profile</string>
-    <string name="navigation_Call">Khẩn Cấp</string>
+    <string name="navigation_Home">Trang chủ</string>
+    <string name="navigation_Account">Tài khoản</string>
+    <string name="navigation_Profile">Thông tin cá nhân</string>
+    <string name="navigation_About_us">Về chúng tôi</string>
     <string name="navigation_Login">Đăng Nhập</string>
 
     <string name="navigation_Drawer_Open">Open Navigation Drawer</string>
