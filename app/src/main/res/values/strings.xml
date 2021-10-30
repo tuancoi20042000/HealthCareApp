@@ -22,4 +22,5 @@
 
     <string name="navigation_Drawer_Open">Open Navigation Drawer</string>
     <string name="navigation_Drawer_Close">Close Navigation Drawer</string>
+    <string name="title_activity_location">Map</string>
 </resources>
