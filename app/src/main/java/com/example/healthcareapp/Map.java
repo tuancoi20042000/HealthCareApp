@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -101,6 +102,7 @@ public class Map extends AppCompatActivity {
                     if(location != null){
                         lat = location.getLatitude();
                         lng = location.getLongitude();
+                        Log.d("TAG", "onComplete: lat = "+lat+" lng = "+lng);
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -114,6 +116,7 @@ public class Map extends AppCompatActivity {
                                 Location location1 = locationResult.getLastLocation();
                                 lat = location1.getLatitude();
                                 lng = location1.getLongitude();
+                                Log.d("TAG", "onLocationResult: lat = "+lat+" lng = "+lng);
                             }
                         };
                         fusedLocationProviderClient.requestLocationUpdates(locationRequest
