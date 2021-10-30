@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/FALL_2021/PRM/Project/HealthCareApp/app/src/main/res/drawable/custom_button.xml" value="0.22135416666666666" />
-        <entry key="..\:/FALL_2021/PRM/Project/HealthCareApp/app/src/main/res/drawable/ic_account.xml" value="0.3828125" />
-        <entry key="..\:/FALL_2021/PRM/Project/HealthCareApp/app/src/main/res/layout/activity_cart.xml" value="0.20520833333333333" />
-        <entry key="..\:/FALL_2021/PRM/Project/HealthCareApp/app/src/main/res/layout/activity_list_order.xml" value="0.20520833333333333" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.22135416666666666" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/drawable/round_conner.xml" value="0.22135416666666666" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/drawable/round_conner1.xml" value="0.3828125" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/layout/itemorder_card.xml" value="0.36666666666666664" />
+        <entry key="..\:/FALL_2021/PRM/Project/Main project/HealthCareApp/app/src/main/res/layout/product.xml" value="0.36666666666666664" />
+        <entry key="..\:/FALL_2021/PRM/Project/asdasdf/HealthCareApp/app/src/main/res/drawable/custom_button.xml" value="0.22135416666666666" />
+        <entry key="..\:/FALL_2021/PRM/Project/asdasdf/HealthCareApp/app/src/main/res/layout/activity_cart.xml" value="0.21600877192982457" />
+        <entry key="..\:/FALL_2021/PRM/Project/asdasdf/HealthCareApp/app/src/main/res/layout/activity_list_order.xml" value="0.7303058387395737" />
       </map>
     </option>
   </component>

@@ -47,28 +47,15 @@
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextName"
+                    android:id="@+id/editTextPassWord"
                     style="@style/modifiedEditText"
-                    android:hint="Tên đăng nhập"
-                    android:inputType="textPersonName"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPassword"
-                style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-
-                <EditText
-                    android:id="@+id/editTextPassword"
-                    style="@style/modifiedEditText"
-                    android:hint="Mật khẩu"
+                    android:hint="Mật Khẩu"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputRePassword"
+                android:id="@+id/textInputPassword"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
@@ -80,7 +67,21 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputRePassword"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    style="@style/modifiedEditText"
+                    android:hint="Phone"
+                    android:inputType="phone"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
+                android:id="@+id/btn_Register"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:backgroundTint="#FF9800"
@@ -93,6 +94,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/textView_Login"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:layout_marginBottom="20dp"

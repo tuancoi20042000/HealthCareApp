@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChatBotActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:background="#03A9F4">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.036"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.545" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="118dp"
+            android:layout_marginEnd="138dp"
+            android:layout_marginRight="138dp"
+            android:text="ChatBot hỏi đáp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintVertical_bias="0.555" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--recycler view to display our chats-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRVChats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/idLLMessage" />
+
+        <LinearLayout
+            android:id="@+id/idLLMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <!--edit text to enter message-->
+            <EditText
+                android:id="@+id/idEdtMessage"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.2"
+                android:layout_marginBottom="5dp"
+                android:hint="Enter Message" />
+
+            <!--button to send message-->
+            <ImageView
+                android:id="@+id/idIBSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/ic_send"
+                tools:ignore="UseAppTint" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
