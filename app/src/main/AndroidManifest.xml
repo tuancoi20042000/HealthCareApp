@@ -24,14 +24,6 @@
         android:theme="@style/Theme.HealthCareApp"
         android:usesCleartextTraffic="true">
 
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -61,7 +53,9 @@
         <activity android:name=".ContactActivity" />
         <activity android:name=".ErrorActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".CartActivity" />
+        <activity android:name=".CartActivity" >
+
+        </activity>
         <activity
             android:name=".OrderDetailActivity"
             android:label="@string/title_activity_order_detail"
@@ -69,7 +63,9 @@
         <activity android:name=".ListOrderActivity" />
         <activity android:name=".ListItem_SearchActivity" />
         <activity android:name=".ItemDetailActivity" />
-        <activity android:name=".ListItemActivity" />
+        <activity android:name=".ListItemActivity" >
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

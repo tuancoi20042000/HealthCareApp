@@ -24,7 +24,7 @@
                 android:layout_height="100dp">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageViewbtCart"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="4dp"
