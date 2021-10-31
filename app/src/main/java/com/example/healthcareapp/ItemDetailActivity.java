@@ -156,6 +156,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                             int quantity = numberOrder + oldQuan;
                             Map<String, Object> item = new HashMap<>();
                             item.put("userID", u.getId());
+                            item.put("pID", p.getpID());
                             item.put("nameP", p.getpName());
                             item.put("priceP", p.getpPrice());
                             item.put("quantityP", quantity);

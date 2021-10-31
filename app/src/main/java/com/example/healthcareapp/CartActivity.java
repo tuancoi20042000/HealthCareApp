@@ -1,5 +1,6 @@
 package com.example.healthcareapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -66,7 +67,6 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void getBundle() {
-
         btMuahang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,14 +83,26 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (chonAll.isChecked()) {
-                    Toast.makeText(CartActivity.this, "Chon: " + listCart.size(), Toast.LENGTH_SHORT).show();
                     getSumMon();
+
                 } else {
-                    Toast.makeText(CartActivity.this, "Chua chon", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this,"Bạn chưa chọn sản phẩm nào.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
+        btMuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chonAll.isChecked() && listCart.size()>0) {
+                    getSumMon();
+                    Intent intent = new Intent(CartActivity.this, OrderDetailActivity.class);
+                    intent.putExtra("ShipAddress", txtDiaChi.getText().toString());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CartActivity.this,"Bạn chưa chọn sản phẩm nào.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -106,6 +118,7 @@ public class CartActivity extends AppCompatActivity {
                         pr.setpPrice(Float.parseFloat(doc.get("quantityP").toString()));
                         pr.setpImage(doc.get("imageP").toString());
                         pr.setpName(doc.get("nameP").toString());
+                        pr.setpID(doc.get("pID").toString());
                         c.setUser(us);
                         c.setProduct(pr);
                         c.setCartID(doc.get("cartID").toString());

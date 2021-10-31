@@ -13,23 +13,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.healthcareapp.R;
+import com.example.healthcareapp.data_local.DataLocalManager;
 import com.example.healthcareapp.model.Cart;
 import com.example.healthcareapp.model.Product;
+import com.example.healthcareapp.model.Users;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     List<Cart> listCart;
     Context context;
     private ArrayList<Cart> listUpdated;
     private boolean updateStatus;
-
+    FirebaseFirestore firestore;
+    Users u = DataLocalManager.getUsers();
+    CollectionReference reference;
     public CartAdapter(List<Cart> listCart, Context context) {
         this.listCart = listCart;
         this.context = context;
         listUpdated = (ArrayList<Cart>) listCart;
         updateStatus = false;
+        firestore= FirebaseFirestore.getInstance();
+        reference =firestore.collection("Cart");
     }
 
     public CartAdapter(Context context) {
@@ -126,6 +137,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             listCart = new ArrayList<>();
             notifyDataSetChanged();
         } else {
+            DocumentReference doc = reference.document(u.getId() + listCart.get(position).getProduct().getpID());
+            doc.delete();
             listCart.remove(position);
             notifyItemRangeRemoved(position, listCart.size());
             notifyItemRangeChanged(position, listCart.size());
@@ -137,17 +150,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         if (status == true) {
             int number = listCart.get(postion).getNumOfQuan() + 1;
             listUpdated.get(postion).setNumOfQuan(number);
+            updateFireBase(postion,number);
             notifyItemChanged(postion);
             return number;
         } else {
             int number = listUpdated.get(postion).getNumOfQuan() - 1;
+            updateFireBase(postion,number);
             if (number <= 1) {
                 number = 1;
             }
             listUpdated.get(postion).setNumOfQuan(number);
+
             notifyItemChanged(postion);
             return number;
         }
     }
+    public void updateFireBase(int postion, int number){
+        Map<String, Object> item = new HashMap<>();
+        item.put("userID", u.getId());
+        item.put("nameP",  listCart.get(postion).getProduct().getpName());
+        item.put("pID", listCart.get(postion).getProduct().getpID());
+        item.put("priceP", listCart.get(postion).getProduct().getpPrice());
+        item.put("quantityP", number);
+        item.put("imageP", listCart.get(postion).getProduct().getpImage());
+        item.put("cartID", u.getId() + listCart.get(postion).getProduct().getpID());
+        reference.document(u.getId() + listCart.get(postion).getProduct().getpID()).set(item);
+    }
+
 }
 
