@@ -187,7 +187,7 @@
             app:srcCompat="@drawable/banggau" />
 
         <TextView
-            android:id="@+id/title2Txt"
+            android:id="@+id/txtNameCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -208,9 +208,9 @@
             android:text="Successfull"
             android:textColor="#373b54"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/title2Txt"
+            app:layout_constraintBottom_toBottomOf="@+id/txtNameCart"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title2Txt"
+            app:layout_constraintTop_toTopOf="@+id/txtNameCart"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -221,12 +221,12 @@
             android:text="Status: "
             android:textColor="#ff3d00"
             android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="@+id/title2Txt"
+            app:layout_constraintBottom_toBottomOf="@+id/txtNameCart"
             app:layout_constraintEnd_toStartOf="@+id/feeEachItem"
-            app:layout_constraintTop_toTopOf="@+id/title2Txt" />
+            app:layout_constraintTop_toTopOf="@+id/txtNameCart" />
 
         <TextView
-            android:id="@+id/totalEachItem"
+            android:id="@+id/txtMoneyCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20"
@@ -246,7 +246,7 @@
             android:textColor="#ff3d00"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/totalEachItem"
+            app:layout_constraintEnd_toStartOf="@+id/txtMoneyCart"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView19"
             app:layout_constraintTop_toBottomOf="@+id/textView19"

@@ -53,8 +53,9 @@
         <activity android:name=".ContactActivity" />
         <activity android:name=".ErrorActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".CartActivity" />
+        <activity android:name=".CartActivity" >
+
+        </activity>
         <activity
             android:name=".OrderDetailActivity"
             android:label="@string/title_activity_order_detail"
@@ -62,7 +63,9 @@
         <activity android:name=".ListOrderActivity" />
         <activity android:name=".ListItem_SearchActivity" />
         <activity android:name=".ItemDetailActivity" />
-        <activity android:name=".ListItemActivity" />
+        <activity android:name=".ListItemActivity" >
+
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
