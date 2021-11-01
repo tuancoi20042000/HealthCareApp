@@ -1,6 +1,5 @@
 package com.example.healthcareapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -173,8 +172,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                         Log.d("TAG", "onTuanFail: ");
                     }
                 });
-                Intent intent = new Intent(ItemDetailActivity.this, ListItemActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ItemDetailActivity.this, ListItemActivity.class);
+//                startActivity(intent);
             }
         });
     }

@@ -120,9 +120,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                         for (Hospital ho : listHospital.subList(0, 5)) {
                             LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
                             mMap.addMarker(new MarkerOptions()
-                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_local_hospital_24))
+//                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_local_hospital_24))
                                     .position(new LatLng(ho.getLat(), ho.getLng()))
-                                    .title(ho.getName() + "\n" + ho.getPhone()));
+                                    .title(ho.getName()));
 
                         }
                         controlCam(new LatLng(listHospital.get(0).getLat(),listHospital.get(0).getLng()));
@@ -166,7 +166,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                             LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
                             Log.d("TAG", "onMapReady Ho: " + ho.getLat() + ho.getLng());
                             mMap.addMarker(new MarkerOptions()
-                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_medical_services_24))
+//                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_medical_services_24))
                                     .position(new LatLng(ho.getLat(), ho.getLng()))
                                     .title(ho.getName() + "\n"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HosLocation, 12));
@@ -217,9 +217,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
                         LatLng currentLocation = new LatLng(lat,lng);
                         Log.d("TAG", "onMapReady: "+lat+lng);
-                        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Here"));
+                        mMap.addMarker(new MarkerOptions()
+                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_location_on_24))
+                                .position(currentLocation)
+                                .title("Here"));
                         Log.d("TAG", "onMapReady: "+currentLocation.longitude);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,15));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,16));
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
