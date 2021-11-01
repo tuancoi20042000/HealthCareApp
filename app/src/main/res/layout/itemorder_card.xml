@@ -12,7 +12,7 @@
     android:elevation="3dp">
 
     <ImageView
-        android:id="@+id/picCard"
+        android:id="@+id/picCard1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="4dp"
@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/banggau" />
 
     <TextView
-        android:id="@+id/txtNameCart"
+        android:id="@+id/txtNCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -35,15 +35,14 @@
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#373b54"
-        app:layout_constraintStart_toEndOf="@+id/picCard"
-        app:layout_constraintTop_toTopOf="@+id/picCard" />
+        app:layout_constraintStart_toEndOf="@+id/picCard1"
+        app:layout_constraintTop_toTopOf="@+id/picCard1" />
 
     <TextView
-        android:id="@+id/txtMoneyCart"
+        android:id="@+id/txtQCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="10dp"
         android:text="20"
         android:textColor="#373b54"
         android:textSize="12sp"
@@ -57,8 +56,7 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginLeft="68dp"
+        android:layout_marginStart="60dp"
         android:text="Total bill"
         android:textColor="#FF9800"
         android:textSize="14dp"
@@ -80,8 +78,10 @@
         android:textSize="10sp"
 
 
-        app:layout_constraintStart_toStartOf="@+id/txtNameCart"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameCart" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtNCart"
+        app:layout_constraintTop_toBottomOf="@+id/txtNCart"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -90,7 +90,7 @@
         android:text="Đang giao"
         android:textSize="8sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="@+id/txtNameCart"
+        app:layout_constraintBottom_toBottomOf="@+id/txtNCart"
         app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/txtNameCart" />
+        app:layout_constraintTop_toTopOf="@+id/txtNCart" />
 </androidx.constraintlayout.widget.ConstraintLayout>

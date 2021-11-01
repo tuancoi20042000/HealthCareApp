@@ -92,14 +92,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public class CartHolder extends RecyclerView.ViewHolder {
         public ImageView picCart, btDelCart;
         public TextView txtNameCart, txtmoneyCart, txtnumOfQuan;
-        public CheckBox cbCart;
         public ImageView minusCart, plusCart;
 
         public CartHolder(@NonNull View itemView) {
             super(itemView);
-            picCart = itemView.findViewById(R.id.picCard);
-            txtNameCart = itemView.findViewById(R.id.txtNameCart);
-            txtmoneyCart = itemView.findViewById(R.id.txtMoneyCart);
+            picCart = itemView.findViewById(R.id.picCard1);
+            txtNameCart = itemView.findViewById(R.id.txtNCart);
+            txtmoneyCart = itemView.findViewById(R.id.txtQCart);
             txtnumOfQuan = itemView.findViewById(R.id.txtnumOfQuan);
             btDelCart = itemView.findViewById(R.id.btDelCart);
             minusCart = itemView.findViewById(R.id.minusCardBtn);

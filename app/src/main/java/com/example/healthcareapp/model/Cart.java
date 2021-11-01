@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Cart implements Serializable {
     private String cartID;
-   private Users user;
-   private int numOfQuan;
+    private Users user;
+    private int numOfQuan;
     private Product product;
 
     public Cart() {

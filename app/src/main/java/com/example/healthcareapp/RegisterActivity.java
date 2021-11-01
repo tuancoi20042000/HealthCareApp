@@ -42,8 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPhone=findViewById(R.id.editTextPhone);
         editText_Login=findViewById(R.id.textView_Login);
 
-
-
         dialog = new ProgressDialog(this);
 
         editText_Login.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.example.healthcareapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,21 +66,17 @@ public class CartActivity extends AppCompatActivity {
         btBackCart = findViewById(R.id.btBackCart);
         firestore = FirebaseFirestore.getInstance();
         reference = firestore.collection("Cart");
+        txtDiaChi.setText("Thôn 5, Tân Xã, Thạch Thất");
     }
 
     public void getBundle() {
-        btMuahang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CartActivity.this, "size: " + listCart.size(), Toast.LENGTH_SHORT).show();
-            }
-        });
         btBackCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
         chonAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,19 +88,24 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
+
         btMuahang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chonAll.isChecked() && listCart.size()>0) {
                     getSumMon();
                     Intent intent = new Intent(CartActivity.this, OrderDetailActivity.class);
-                    intent.putExtra("ShipAddress", txtDiaChi.getText().toString());
+                    intent.putExtra("shipAddress",txtDiaChi.getText().toString());
+                    intent.putExtra("sumMoney",sumMoney.getText().toString());
+
+                    Log.d("TAG", "onClick: "+sumMoney.getText().toString());
                     startActivity(intent);
                 } else {
                     Toast.makeText(CartActivity.this,"Bạn chưa chọn sản phẩm nào.",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -164,7 +167,8 @@ public class CartActivity extends AppCompatActivity {
         for (Cart ca : listCart) {
             sumMon += ca.getNumOfQuan() * ca.getProduct().getpPrice();
         }
-        sumMoney.setText(sumMon + "");
+        String numberFormat = String.format("%.2f",sumMon);
+        sumMoney.setText(numberFormat);
     }
 
 
