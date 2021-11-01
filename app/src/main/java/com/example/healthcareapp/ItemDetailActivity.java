@@ -162,7 +162,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                             item.put("imageP", p.getpImage());
                             item.put("cartID", u.getId() + p.getpID());
                             reference.document(u.getId() + p.getpID()).set(item);
-                            Toast.makeText(ItemDetailActivity.this, "Add to Cart successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ItemDetailActivity.this, "Thêm vào giỏ hàng thành công ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
