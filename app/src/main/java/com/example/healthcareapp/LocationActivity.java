@@ -224,7 +224,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 .position(currentLocation)
                                 .title("Here"));
                         Log.d("TAG", "onMapReady: "+currentLocation.longitude);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,16));
+                        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,17));
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -268,6 +269,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 .tilt(45)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
     }
 
 }
