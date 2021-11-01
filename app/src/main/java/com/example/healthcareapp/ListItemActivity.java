@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthcareapp.adapter.ProductAdapter;
 import com.example.healthcareapp.adapter.TopProductAdapter;
+import com.example.healthcareapp.data_local.DataLocalManager;
 import com.example.healthcareapp.model.Product;
+import com.example.healthcareapp.model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -43,6 +45,7 @@ public class ListItemActivity extends AppCompatActivity {
     private CollectionReference reference;
     private List<Product> list = new ArrayList<>();
     private List<Product> listTopOrder = new ArrayList<>();
+    Users user = DataLocalManager.getUsers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +117,12 @@ public class ListItemActivity extends AppCompatActivity {
                                 Toast.makeText(ListItemActivity.this, "Home", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.action_cart:
-                                Toast.makeText(ListItemActivity.this, "Cart", Toast.LENGTH_SHORT).show();
+                                if(user != null){
+                                    Intent intent1 = new Intent(ListItemActivity.this, ListOrderActivity.class);
+                                    startActivity(intent1);
+                                }else{
+                                    Toast.makeText(ListItemActivity.this, "Bạn phải đăng nhập để xem giỏ hàng :)", Toast.LENGTH_SHORT).show();
+                                }
                                 break;
                             case R.id.action_search:
                                 Intent intent = new Intent(ListItemActivity.this, ListItem_SearchActivity.class);

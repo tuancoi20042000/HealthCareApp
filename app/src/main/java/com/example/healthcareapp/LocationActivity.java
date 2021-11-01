@@ -112,11 +112,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 h.setLng(lg1);
                                 h.setLat(lat1);
                                 h.setPhone(phone);
-                                h.setDistance(distance);
+                                h.setDistance(distance*1000000000);
                                 listHospital.add(h);
                             }
+                            Collections.sort(listHospital);
                         }
-                        Collections.sort(listHospital);
+//                        Collections.sort(listHospital);
                         for (Hospital ho : listHospital.subList(0, 5)) {
                             LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
                             mMap.addMarker(new MarkerOptions()
@@ -157,11 +158,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 ph.setName(name);
                                 ph.setLng(lg1);
                                 ph.setLat(lat1);
-                                ph.setDistance(distance);
+                                ph.setDistance(distance*1000000000);
+                                Log.d("TAG", "onComplete Distance: "+distance);
                                 listPharma.add(ph);
                             }
+                            Collections.sort(listPharma);
                         }
-                        Collections.sort(listPharma);
                         for (Pharmacy ho : listPharma.subList(0, 5)) {
                             LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
                             Log.d("TAG", "onMapReady Ho: " + ho.getLat() + ho.getLng());
@@ -222,7 +224,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 .position(currentLocation)
                                 .title("Here"));
                         Log.d("TAG", "onMapReady: "+currentLocation.longitude);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,16));
+                        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,17));
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -266,6 +269,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 .tilt(45)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
     }
 
 }

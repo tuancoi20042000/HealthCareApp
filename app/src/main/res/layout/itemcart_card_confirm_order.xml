@@ -19,10 +19,36 @@
         android:layout_weight="5" >
 
 
+        <TextView
+            android:id="@+id/txtMCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1000"
+            android:textColor="#747575"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số Lượng :"
+            android:textColor="#ff3d00"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/txtNCart"
+            app:layout_constraintVertical_bias="0.836" />
+
         <ImageView
             android:id="@+id/picCard1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
@@ -32,63 +58,34 @@
             app:layout_constraintVertical_bias="0.13"
             app:srcCompat="@drawable/banggau" />
 
+
         <TextView
             android:id="@+id/txtNCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:text="Băng gâu"
             android:textColor="#373b54"
             android:textSize="16dp"
+
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtnumOfQuan"
-            app:layout_constraintStart_toStartOf="@+id/minusCardBtn"
-            app:layout_constraintTop_toTopOf="@+id/picCard1"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/minusCardBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/picCard1"
             app:layout_constraintStart_toEndOf="@+id/picCard1"
-            app:srcCompat="@drawable/minus" />
+            app:layout_constraintTop_toTopOf="@+id/picCard1" />
 
-        <TextView
-        android:id="@+id/txtnumOfQuan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="1"
-        android:textColor="#373b54"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/minusCardBtn"
-        app:layout_constraintStart_toEndOf="@+id/minusCardBtn"
-        app:layout_constraintTop_toTopOf="@+id/minusCardBtn" />
-
-    <ImageView
-        android:id="@+id/plusCardBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/minusCardBtn"
-        app:layout_constraintStart_toEndOf="@+id/txtnumOfQuan"
-        app:layout_constraintTop_toTopOf="@+id/minusCardBtn"
-        app:srcCompat="@drawable/plus" />
 
         <TextView
             android:id="@+id/txtQCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="1000"
-            android:textColor="#373b54"
-            android:textSize="16dp"
+            android:textColor="#747575"
+            android:textSize="10dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView21"
-            app:layout_constraintStart_toEndOf="@+id/textView21"
-            app:layout_constraintTop_toTopOf="@+id/textView21"
+            app:layout_constraintBottom_toBottomOf="@+id/textView19"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.035"
+            app:layout_constraintStart_toEndOf="@+id/textView19"
+            app:layout_constraintTop_toTopOf="@+id/textView19"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -98,26 +95,11 @@
             android:layout_marginStart="24dp"
             android:text="$"
             android:textColor="#ff3d00"
-            android:textSize="16sp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/picCard1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.494" />
-
-        <ImageView
-            android:id="@+id/btDelCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#FF5722"
-            android:padding="4dp"
-            android:src="@drawable/ic_baseline_delete_24"
-            app:layout_constraintBottom_toBottomOf="@+id/txtNCart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.927"
-            app:layout_constraintStart_toEndOf="@+id/txtNCart"
-            app:layout_constraintTop_toTopOf="@+id/txtNCart"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNCart"
+            app:layout_constraintVertical_bias="0.121" />
 
         <TextView
             android:id="@+id/textView23"

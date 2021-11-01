@@ -33,9 +33,9 @@
         android:textAlignment="center"
         android:textColor="#7E7E7E"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintBottom_toBottomOf="@+id/txtUserName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/txtUserName"
         app:layout_constraintVertical_bias="0.571" />
 
     <EditText
@@ -102,11 +102,11 @@
         android:textAlignment="center"
         android:textColor="#7E7E7E"
         android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintBottom_toBottomOf="@+id/txtMaDonHang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/EditPhone"
-        app:layout_constraintTop_toTopOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/txtMaDonHang"
         app:layout_constraintVertical_bias="0.523" />
 
     <EditText
@@ -120,11 +120,11 @@
         android:text="Address"
         android:textAlignment="center"
         android:textColor="#7E7E7E"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintBottom_toBottomOf="@+id/txtUserPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/EditEmail"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/txtUserPhone"
         app:layout_constraintVertical_bias="0.523" />
 
     <EditText
@@ -212,12 +212,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/txtUserName"
+        app:layout_constraintTop_toBottomOf="@+id/txtUserName"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/txtMaDonHang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
@@ -230,7 +230,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/txtUserPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Địa chỉ"
@@ -238,8 +238,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="@+id/txtMaDonHang"
+        app:layout_constraintTop_toBottomOf="@+id/txtMaDonHang"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -292,7 +292,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/txtUserPhone"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
@@ -330,7 +330,7 @@
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/txtUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -363,8 +363,8 @@
         android:text="Ngày Sinh"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/txtUserPhone"
+        app:layout_constraintTop_toBottomOf="@+id/txtUserPhone"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView

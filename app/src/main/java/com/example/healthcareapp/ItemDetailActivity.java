@@ -78,7 +78,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     public void getBundle() {
         object = (Product) getIntent().getSerializableExtra("object");
         pName.setText(object.getpName());
-        pPrice.setText(object.getpPrice() + "$");
+        pPrice.setText("$" + String.format("%.2f", object.getpPrice()));
         pDes.setText(object.getpDescription());
         pQuan.setText(object.getpQuantity() + "");
         Glide.with(this)
@@ -104,7 +104,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 numberOrder++;
                 textViewNum.setText(String.valueOf(numberOrder));
-                pPrice.setText("$" + (object.getpPrice() * numberOrder));
+                pPrice.setText("$" + String.format("%.2f",(object.getpPrice() * numberOrder)));
             }
         });
         // Decrease number to buy
@@ -114,7 +114,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 if (numberOrder > 1) {
                     numberOrder--;
                     textViewNum.setText(String.valueOf(numberOrder));
-                    pPrice.setText("$" + (object.getpPrice()) * numberOrder);
+                    pPrice.setText("$" + String.format("%.2f",(object.getpPrice()) * numberOrder));
                 }
             }
         });
@@ -136,17 +136,17 @@ public class ItemDetailActivity extends AppCompatActivity {
                             QuerySnapshot snapshot = task.getResult();
                             for (QueryDocumentSnapshot doc : snapshot) {
                                 oldQuan = 0;
-                                Log.d("TAG", "onTuan: "+doc.getId());
-                                Log.d("TAG", "onTuan2: "+u.getId()+p.getpID());
+                                Log.d("TAG", "onTuan: " + doc.getId());
+                                Log.d("TAG", "onTuan2: " + u.getId() + p.getpID());
                                 String id = doc.getId().trim();
-                                String sId = u.getId().trim()+p.getpID().trim();
-                                Log.d("TAG", "onTuan3:"+id.length());
-                                Log.d("TAG", "onTuan4: "+sId.length());
+                                String sId = u.getId().trim() + p.getpID().trim();
+                                Log.d("TAG", "onTuan3:" + id.length());
+                                Log.d("TAG", "onTuan4: " + sId.length());
                                 boolean a = (id.equals(sId));
-                                Log.d("TAG", "onTuan5: "+a);
-                                if(id.equals(sId)){
+                                Log.d("TAG", "onTuan5: " + a);
+                                if (id.equals(sId)) {
                                     oldQuan = Integer.parseInt(doc.get("quantityP").toString());
-                                    Log.d("TAG", "onTuan8: "+Integer.parseInt(doc.get("quantityP").toString()));
+                                    Log.d("TAG", "onTuan8: " + Integer.parseInt(doc.get("quantityP").toString()));
 
 
                                     break;
@@ -162,7 +162,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                             item.put("imageP", p.getpImage());
                             item.put("cartID", u.getId() + p.getpID());
                             reference.document(u.getId() + p.getpID()).set(item);
-                            Toast.makeText(ItemDetailActivity.this, "Add to Cart successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ItemDetailActivity.this, "Thêm vào giỏ hàng thành công ", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
