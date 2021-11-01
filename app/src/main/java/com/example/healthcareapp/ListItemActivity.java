@@ -38,6 +38,7 @@ public class ListItemActivity extends AppCompatActivity {
     private TopProductAdapter productAdapter2;
     private BottomNavigationView bottomNavigationView;
     private ImageView btSort;
+    private ImageView btCart;
     private FirebaseFirestore firestore;
     private CollectionReference reference;
     private List<Product> list = new ArrayList<>();
@@ -51,6 +52,14 @@ public class ListItemActivity extends AppCompatActivity {
         reference = firestore.collection("Product");
         initView();
 
+        findViewById(R.id.action_home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListItemActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -58,7 +67,7 @@ public class ListItemActivity extends AppCompatActivity {
                     QuerySnapshot snapshot = task.getResult();
                     for (QueryDocumentSnapshot doc : snapshot) {
                         Product p = new Product();
-                        p.setpID(doc.getId().toString());
+                        p.setpID(doc.get("pID").toString());
                         p.setpName(doc.get("name").toString());
                         p.setpImage(doc.get("image").toString());
                         p.setpDescription(doc.get("descrip").toString());
@@ -82,6 +91,7 @@ public class ListItemActivity extends AppCompatActivity {
 
     public void initView() {
         btSort = findViewById(R.id.btSort);
+        btCart = findViewById(R.id.imageViewbtCart);
         // list product
         recyclerView = findViewById(R.id.listProduct);
         productAdapter = new ProductAdapter(this);
@@ -115,6 +125,13 @@ public class ListItemActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+        btCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListItemActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

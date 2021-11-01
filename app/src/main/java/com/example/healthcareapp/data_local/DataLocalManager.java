@@ -3,6 +3,7 @@ package com.example.healthcareapp.data_local;
 
 import android.content.Context;
 
+import com.example.healthcareapp.model.Cart;
 import com.example.healthcareapp.model.Users;
 import com.google.gson.Gson;
 
@@ -33,5 +34,4 @@ public class DataLocalManager {
         Users users = gson.fromJson(strJsonUsers,Users.class);
         return users;
     }
-
 }

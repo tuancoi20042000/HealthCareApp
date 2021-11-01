@@ -4,6 +4,7 @@ public class Users {
     private String id;
     private String Email;
     private String Avatar;
+    private String Address;
 
     public Users() {
     }
@@ -11,7 +12,7 @@ public class Users {
     public Users(String id, String email, String avatar) {
         this.id = id;
         Email = email;
-        Avatar =avatar;
+        Avatar = avatar;
     }
 
     public String getId() {
@@ -36,5 +37,20 @@ public class Users {
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public Users(String id, String email, String avatar, String address) {
+        this.id = id;
+        Email = email;
+        Avatar = avatar;
+        Address = address;
     }
 }

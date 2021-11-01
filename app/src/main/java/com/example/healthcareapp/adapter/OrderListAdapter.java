@@ -61,9 +61,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.picCard);
-            name = itemView.findViewById(R.id.title2Txt);
+            name = itemView.findViewById(R.id.txtNameCart);
             status = itemView.findViewById(R.id.textView3);
-            totalBill = itemView.findViewById(R.id.totalEachItem);
+            totalBill = itemView.findViewById(R.id.txtMoneyCart);
 //            confirm = itemView.findViewById(R.id.button);
         }
     }

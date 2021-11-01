@@ -72,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
                         Uri uri = data.getData();
                         Users users = DataLocalManager.getUsers();
                         users.setAvatar(String.valueOf(uri));
-                        users = new Users(users.getId(),users.getEmail(),users.getAvatar());
+                        users = new Users(users.getId(),users.getEmail(),users.getAvatar(),users.getAddress());
                         DataLocalManager.setUser(users);
                         img = String.valueOf(uri);
                         Glide.with(ProfileActivity.this).load(users.getAvatar()).error(R.drawable.girl).into(editImageView);
@@ -105,6 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         Users users = DataLocalManager.getUsers();
+
         String email=users.getEmail();
         String id = users.getId();
         showUserInformation(email);
@@ -281,7 +282,6 @@ public class ProfileActivity extends AppCompatActivity {
                                     EditAddress.setText(document.getString("Address"));
                                     EditGender.setText(document.getString("Gender"));
                                     EditBHYT.setText(document.getString("BHYTCode"));
-
                                 }
 
                             }

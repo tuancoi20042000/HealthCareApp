@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/banggau" />
 
     <TextView
-        android:id="@+id/title2Txt"
+        android:id="@+id/txtNameCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/picCard" />
 
     <TextView
-        android:id="@+id/totalEachItem"
+        android:id="@+id/txtMoneyCart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -80,8 +80,8 @@
         android:textSize="10sp"
 
 
-        app:layout_constraintStart_toStartOf="@+id/title2Txt"
-        app:layout_constraintTop_toBottomOf="@+id/title2Txt" />
+        app:layout_constraintStart_toStartOf="@+id/txtNameCart"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameCart" />
 
     <TextView
         android:id="@+id/textView3"
@@ -90,7 +90,7 @@
         android:text="Đang giao"
         android:textSize="8sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="@+id/title2Txt"
+        app:layout_constraintBottom_toBottomOf="@+id/txtNameCart"
         app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/title2Txt" />
+        app:layout_constraintTop_toTopOf="@+id/txtNameCart" />
 </androidx.constraintlayout.widget.ConstraintLayout>
