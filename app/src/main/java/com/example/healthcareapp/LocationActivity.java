@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -17,9 +19,12 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.healthcareapp.databinding.ActivityLocationBinding;
+import com.example.healthcareapp.model.Hospital;
+import com.example.healthcareapp.model.Pharmacy;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -29,10 +34,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,6 +57,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     double lat = 0,lng = 0;
     FusedLocationProviderClient fusedLocationProviderClient;
     Button hospital, medicine;
+    FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +68,15 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         setContentView(binding.getRoot());
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        if(ActivityCompat.checkSelfPermission(LocationActivity.this,
+        if (ActivityCompat.checkSelfPermission(LocationActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(LocationActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getCurrentLocation();
-        }else{
+        } else {
             ActivityCompat.requestPermissions(LocationActivity.this
                     , new String[]{Manifest.permission.ACCESS_FINE_LOCATION
-                            ,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                            , Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -73,28 +90,96 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LocationActivity.this, Map.class);
-                Uri uri = Uri.parse("https://www.google.com/maps/search/hospital/@"+lat+","+lng+",15z/data=!3m1!4b1");
-                intent.putExtra("uri","https://www.google.com/maps/search/hospital/@"+lat+","+lng+",15z/data=!3m1!4b1");
-                intent.putExtra("lat",lat);
-                intent.putExtra("lng",lng);
-                startActivity(intent);
+                mMap.clear();
+                getCurrentLocation();
+                mMap.setBuildingsEnabled(true);
+                List<Hospital> listHospital = new ArrayList<>();
+                firestore = FirebaseFirestore.getInstance();
+                CollectionReference reference = firestore.collection("Hospital");
+                reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot snapshot = task.getResult();
+                            for (QueryDocumentSnapshot doc : snapshot) {
+                                Hospital h = new Hospital();
+                                String name = doc.get("name").toString();
+                                double lat1 = Double.parseDouble(doc.get("lat").toString());
+                                double lg1 = Double.parseDouble(doc.get("lng").toString());
+                                String phone = doc.get("phone").toString();
+                                double distance = Math.sqrt((lat1 - lat) * (lat1 - lat) + (lg1 - lng) * (lg1 - lng));
+                                h.setName(name);
+                                h.setLng(lg1);
+                                h.setLat(lat1);
+                                h.setPhone(phone);
+                                h.setDistance(distance);
+                                listHospital.add(h);
+                            }
+                        }
+                        Collections.sort(listHospital);
+                        for (Hospital ho : listHospital.subList(0, 5)) {
+                            LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_local_hospital_24))
+                                    .position(new LatLng(ho.getLat(), ho.getLng()))
+                                    .title(ho.getName() + "\n" + ho.getPhone()));
+
+                        }
+                        controlCam(new LatLng(listHospital.get(0).getLat(),listHospital.get(0).getLng()));
+
+                    }
+
+                });
+
+
             }
         });
 
         medicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LocationActivity.this, Map.class);
-                Uri uri = Uri.parse("https://www.google.com/maps/search/medicine+shop/@"+lat+","+lng+",15z/data=!3m1!4b1");
-                intent.putExtra("uri","https://www.google.com/maps/search/medicine+shop/@"+lat+","+lng+",15z/data=!3m1!4b1");
-                intent.putExtra("lat",lat);
-                intent.putExtra("lng",lng);
-                startActivity(intent);
+                mMap.clear();
+                getCurrentLocation();
+                List<Pharmacy> listPharma = new ArrayList<>();
+                firestore = FirebaseFirestore.getInstance();
+                CollectionReference reference = firestore.collection("Pharmacy");
+                reference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot snapshot = task.getResult();
+                            for (QueryDocumentSnapshot doc : snapshot) {
+                                Pharmacy ph = new Pharmacy();
+                                String name = doc.get("name").toString();
+                                double lat1 = Double.parseDouble(doc.get("lat").toString());
+                                double lg1 = Double.parseDouble(doc.get("lng").toString());
+                                double distance = Math.sqrt((lat1 - lat) * (lat1 - lat) + (lg1 - lng) * (lg1 - lng));
+                                ph.setName(name);
+                                ph.setLng(lg1);
+                                ph.setLat(lat1);
+                                ph.setDistance(distance);
+                                listPharma.add(ph);
+                            }
+                        }
+                        Collections.sort(listPharma);
+                        for (Pharmacy ho : listPharma.subList(0, 5)) {
+                            LatLng HosLocation = new LatLng(ho.getLat(), ho.getLng());
+                            Log.d("TAG", "onMapReady Ho: " + ho.getLat() + ho.getLng());
+                            mMap.addMarker(new MarkerOptions()
+                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_medical_services_24))
+                                    .position(new LatLng(ho.getLat(), ho.getLng()))
+                                    .title(ho.getName() + "\n"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HosLocation, 12));
+                        }
+                        controlCam(new LatLng(listPharma.get(0).getLat(),listPharma.get(0).getLng()));
+
+                    }
+
+                });
+
+
             }
         });
-
-
     }
 
     /**
@@ -134,7 +219,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                         Log.d("TAG", "onMapReady: "+lat+lng);
                         mMap.addMarker(new MarkerOptions().position(currentLocation).title("Here"));
                         Log.d("TAG", "onMapReady: "+currentLocation.longitude);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,15));
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -161,4 +246,23 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
     }
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+    public void controlCam(LatLng latlg){
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latlg)      // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(90)                // Sets the orientation of the camera to east
+                .tilt(45)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
 }
