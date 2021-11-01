@@ -88,21 +88,21 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
             app:layout_constraintStart_toEndOf="@+id/textView21"
-            app:layout_constraintTop_toTopOf="@+id/textView21" />
+            app:layout_constraintTop_toTopOf="@+id/textView21"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:text="$"
             android:textColor="#ff3d00"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btDelCart"
-            app:layout_constraintHorizontal_bias="0.898"
-            app:layout_constraintStart_toEndOf="@+id/plusCardBtn"
+            app:layout_constraintStart_toEndOf="@+id/picCard"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.954" />
+            app:layout_constraintVertical_bias="0.494" />
 
         <ImageView
             android:id="@+id/btDelCart"
@@ -123,12 +123,14 @@
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="52dp"
             android:text="Đang giảm giá "
             android:textSize="12dp"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/txtnumOfQuan"
-            app:layout_constraintStart_toStartOf="@+id/minusCardBtn" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.876"
+            app:layout_constraintStart_toEndOf="@+id/plusCardBtn"
+            app:layout_constraintTop_toBottomOf="@+id/btDelCart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -115,7 +115,7 @@ public class CartActivity extends AppCompatActivity {
                         Users us = new Users();
                         Product pr = new Product();
                         us.setId(doc.get("userID").toString());
-                        pr.setpPrice(Float.parseFloat(doc.get("quantityP").toString()));
+                        pr.setpPrice(Float.parseFloat(doc.get("priceP").toString()));
                         pr.setpImage(doc.get("imageP").toString());
                         pr.setpName(doc.get("nameP").toString());
                         pr.setpID(doc.get("pID").toString());

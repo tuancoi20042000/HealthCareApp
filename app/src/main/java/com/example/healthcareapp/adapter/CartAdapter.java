@@ -65,6 +65,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         Cart cart = listCart.get(position);
         Product product = cart.getProduct();
         Glide.with(holder.itemView.getContext()).load(product.getpImage()).into(holder.picCart);
+        holder.txtNameCart.setText(product.getpName().substring(0,14));
         holder.txtnumOfQuan.setText(cart.getNumOfQuan() + "");
         holder.txtmoneyCart.setText(cart.getNumOfQuan() * product.getpPrice() + "");
     }
@@ -154,11 +155,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             notifyItemChanged(postion);
             return number;
         } else {
-            int number = listUpdated.get(postion).getNumOfQuan() - 1;
-            updateFireBase(postion,number);
+            int number =listUpdated.get(postion).getNumOfQuan();
             if (number <= 1) {
                 number = 1;
             }
+            else{
+                 number = listUpdated.get(postion).getNumOfQuan() - 1;
+            }
+            updateFireBase(postion,number);
+
             listUpdated.get(postion).setNumOfQuan(number);
 
             notifyItemChanged(postion);
