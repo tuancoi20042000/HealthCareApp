@@ -50,47 +50,48 @@ import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE = 10;
-    private static  String img = "";
+    private static String img = "";
     Button btn_edit, btn_out;
     EditText EditName, EditDOB, EditEmail, EditPhone, EditAddress, EditGender, EditBHYT;
     FirebaseFirestore fb = FirebaseFirestore.getInstance();
     TextView textViewID;
-    ImageView imageViewBack,editImageView,datePick;
+    ImageView imageViewBack, editImageView, datePick;
     private static final int PICK_IMAGE = 1;
     DatePickerDialog.OnDateSetListener setListener;
 
 
-    ActivityResultLauncher<Intent> mIntentActivityResultLauncher =registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+    ActivityResultLauncher<Intent> mIntentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        if(data == null){
+                        if (data == null) {
                             return;
                         }
                         Uri uri = data.getData();
                         Users users = DataLocalManager.getUsers();
                         users.setAvatar(String.valueOf(uri));
-                        users = new Users(users.getId(),users.getEmail(),users.getAvatar(),users.getAddress());
+                        users = new Users(users.getId(), users.getEmail(), users.getAvatar(), users.getAddress());
                         DataLocalManager.setUser(users);
                         img = String.valueOf(uri);
                         Glide.with(ProfileActivity.this).load(users.getAvatar()).error(R.drawable.girl).into(editImageView);
                         try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                             editImageView.setImageBitmap(bitmap);
-                        }catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 }
             });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         btn_edit = findViewById(R.id.btn_edit);
-      //  btn_out = findViewById(R.id.btn_out);
+        //  btn_out = findViewById(R.id.btn_out);
         EditName = findViewById(R.id.EditName);
         EditDOB = findViewById(R.id.EditDOB);
         EditEmail = findViewById(R.id.EditEmail);
@@ -99,14 +100,14 @@ public class ProfileActivity extends AppCompatActivity {
         EditGender = findViewById(R.id.EditGender);
         EditBHYT = findViewById(R.id.EditBHYT);
         textViewID = findViewById(R.id.textViewID);
-        imageViewBack=findViewById(R.id.imageViewBack);
+        imageViewBack = findViewById(R.id.imageViewBack);
         editImageView = findViewById(R.id.editImageView);
         datePick = findViewById(R.id.datePick);
 
 
         Users users = DataLocalManager.getUsers();
 
-        String email=users.getEmail();
+        String email = users.getEmail();
         String id = users.getId();
         showUserInformation(email);
 
@@ -120,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         ProfileActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        setListener,year,month,day
+                        setListener, year, month, day
                 );
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)
                 );
@@ -130,8 +131,8 @@ public class ProfileActivity extends AppCompatActivity {
         setListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                month +=1;
-                String date= dayOfMonth +"-"+month+"-"+year;
+                month += 1;
+                String date = dayOfMonth + "-" + month + "-" + year;
                 EditDOB.setText(date);
             }
         };
@@ -145,9 +146,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         imageViewBack.setOnClickListener(new View.OnClickListener() {
             MyShareReference myShareReference = new MyShareReference(ProfileActivity.this);
+
             @Override
             public void onClick(View view) {
-                Intent intent1= new Intent(ProfileActivity.this,HomeActivity.class);
+                Intent intent1 = new Intent(ProfileActivity.this, HomeActivity.class);
                 startActivity(intent1);
                 finish();
             }
@@ -174,16 +176,16 @@ public class ProfileActivity extends AppCompatActivity {
                 String BHYTCODE = EditBHYT.getText().toString().trim();
 
 
-                fb.collection("User").whereEqualTo("Email",email)
+                fb.collection("User").whereEqualTo("Email", email)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    String avatar1 =img;
+                                    String avatar1 = img;
 
                                     DocumentReference contact = fb.collection("User").document(id);
-                                    contact.update("Avatar",avatar1);
+                                    contact.update("Avatar", avatar1);
                                     contact.update("Name", name);
                                     contact.update("DOB", dob);
                                     contact.update("Email", EMAIL);
@@ -213,14 +215,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void onClickPermission() {
-        if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             openGallary();
             return;
-        }else if((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)){
+        } else if ((checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             openGallary();
-        }else{
-            String [] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
-            requestPermissions(permission,MY_REQUEST_CODE);
+        } else {
+            String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
+            requestPermissions(permission, MY_REQUEST_CODE);
         }
 
     }
@@ -228,8 +230,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == MY_REQUEST_CODE){
-            if(grantResults.length  > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == MY_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallary();
             }
         }
@@ -240,7 +242,7 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        mIntentActivityResultLauncher.launch(Intent.createChooser(intent,"Select Picture"));
+        mIntentActivityResultLauncher.launch(Intent.createChooser(intent, "Select Picture"));
 
     }
 
@@ -255,13 +257,14 @@ public class ProfileActivity extends AppCompatActivity {
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        DataLocalManager.getInstance().myShareReference.putStringValue("fieldName","");
+                        DataLocalManager.getInstance().myShareReference.putStringValue("fieldName", "");
                         Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
                     }
                 }).show();
     }
+
     private void showUserInformation(String email) {
         Users users = DataLocalManager.getUsers();
         String avatar = users.getAvatar();

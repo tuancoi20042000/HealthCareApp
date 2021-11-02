@@ -1,8 +1,6 @@
 package com.example.healthcareapp.adapter;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +14,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.healthcareapp.HomeActivity;
-import com.example.healthcareapp.ListOrderActivity;
-import com.example.healthcareapp.OrderDetailActivity;
 import com.example.healthcareapp.R;
-import com.example.healthcareapp.data_local.DataLocalManager;
 import com.example.healthcareapp.model.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -118,7 +111,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
                                                         reference.document(doc.getId()).delete();
                                                         orderArrayList.remove(getAdapterPosition());
                                                         notifyDataSetChanged();
-                                                        Toast.makeText(view.getContext(),"Xóa đơn hàng thành công!",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(view.getContext(), "Xóa đơn hàng thành công!", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             }
@@ -129,7 +122,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
                     builder.setNegativeButton("Hủy Bỏ", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(view.getContext(),"Đã hủy xóa đơn hàng!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(view.getContext(), "Đã hủy xóa đơn hàng!", Toast.LENGTH_SHORT).show();
                         }
                     });
 

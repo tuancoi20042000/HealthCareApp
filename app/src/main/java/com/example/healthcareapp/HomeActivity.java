@@ -2,7 +2,6 @@ package com.example.healthcareapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -37,13 +36,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         Users users = DataLocalManager.getUsers();
 
-        if(users !=null){
+        if (users != null) {
             setContentView(R.layout.activity_home);
             navigationView = findViewById(R.id.navigationView);
             imageViewPro = navigationView.getHeaderView(0).findViewById(R.id.imageViewPro);
-            textViewEmail = navigationView.getHeaderView(0). findViewById(R.id.textViewEmail);
+            textViewEmail = navigationView.getHeaderView(0).findViewById(R.id.textViewEmail);
 
-            String email=users.getEmail();
+            String email = users.getEmail();
             String avatar = users.getAvatar();
             textViewEmail.setText(email);
             Glide.with(this).load(avatar).error(R.drawable.girl).into(imageViewPro);
@@ -65,7 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        }else{
+        } else {
             setContentView(R.layout.activity_home1);
             navigationView = findViewById(R.id.navigationView);
 
@@ -104,22 +103,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
             Users users = DataLocalManager.getUsers();
-            if(users !=null){
-                Intent intent1 = new Intent(HomeActivity.this,ProfileActivity.class);
+            if (users != null) {
+                Intent intent1 = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intent1);
                 finish();
-            }else{
+            } else {
                 Toast.makeText(HomeActivity.this, "Hãy đăng nhập để xem thông tin", Toast.LENGTH_SHORT).show();
             }
 
         } else if (id == R.id.item_info) {
             Intent intent = new Intent(HomeActivity.this, ContactActivity.class);
             startActivity(intent);
-        }else if(id == R.id.item_Login){
-            Intent intent3 = new Intent(HomeActivity.this,LoginActivity.class);
+        } else if (id == R.id.item_Login) {
+            Intent intent3 = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(intent3);
             finish();
-        }else if(id == R.id.item_logout){
+        } else if (id == R.id.item_logout) {
             AlertDialog dialog = new AlertDialog.Builder(this).setTitle("Đăng Xuất")
                     .setMessage("Xác Nhận Đăng Xuất?")
                     .setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -130,7 +129,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
-                            DataLocalManager.getInstance().myShareReference.putStringValue("fieldName","");
+                            DataLocalManager.getInstance().myShareReference.putStringValue("fieldName", "");
                             Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();

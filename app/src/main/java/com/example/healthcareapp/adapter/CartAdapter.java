@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,13 +33,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     FirebaseFirestore firestore;
     Users u = DataLocalManager.getUsers();
     CollectionReference reference;
+
     public CartAdapter(List<Cart> listCart, Context context) {
         this.listCart = listCart;
         this.context = context;
         listUpdated = (ArrayList<Cart>) listCart;
         updateStatus = false;
-        firestore= FirebaseFirestore.getInstance();
-        reference =firestore.collection("Cart");
+        firestore = FirebaseFirestore.getInstance();
+        reference = firestore.collection("Cart");
     }
 
     public CartAdapter(Context context) {
@@ -65,7 +65,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         Cart cart = listCart.get(position);
         Product product = cart.getProduct();
         Glide.with(holder.itemView.getContext()).load(product.getpImage()).into(holder.picCart);
-        holder.txtNameCart.setText(product.getpName().substring(0,14));
+        holder.txtNameCart.setText(product.getpName().substring(0, 14));
         holder.txtnumOfQuan.setText(cart.getNumOfQuan() + "");
         holder.txtmoneyCart.setText(cart.getNumOfQuan() * product.getpPrice() + "");
     }
@@ -150,18 +150,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         if (status == true) {
             int number = listCart.get(postion).getNumOfQuan() + 1;
             listUpdated.get(postion).setNumOfQuan(number);
-            updateFireBase(postion,number);
+            updateFireBase(postion, number);
             notifyItemChanged(postion);
             return number;
         } else {
-            int number =listUpdated.get(postion).getNumOfQuan();
+            int number = listUpdated.get(postion).getNumOfQuan();
             if (number <= 1) {
                 number = 1;
+            } else {
+                number = listUpdated.get(postion).getNumOfQuan() - 1;
             }
-            else{
-                 number = listUpdated.get(postion).getNumOfQuan() - 1;
-            }
-            updateFireBase(postion,number);
+            updateFireBase(postion, number);
 
             listUpdated.get(postion).setNumOfQuan(number);
 
@@ -169,10 +168,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             return number;
         }
     }
-    public void updateFireBase(int postion, int number){
+
+    public void updateFireBase(int postion, int number) {
         Map<String, Object> item = new HashMap<>();
         item.put("userID", u.getId());
-        item.put("nameP",  listCart.get(postion).getProduct().getpName());
+        item.put("nameP", listCart.get(postion).getProduct().getpName());
         item.put("pID", listCart.get(postion).getProduct().getpID());
         item.put("priceP", listCart.get(postion).getProduct().getpPrice());
         item.put("quantityP", number);

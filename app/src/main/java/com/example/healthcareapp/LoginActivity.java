@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public EditText editTextName , editTextPassword;
+    public EditText editTextName, editTextPassword;
     private Button btn_login;
     private TextView viewText_Register;
     private ProgressDialog dialog;
@@ -32,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        viewText_Register=findViewById(R.id.textView_Register);
-        btn_login=findViewById(R.id.btn_login);
-        editTextName= findViewById(R.id.editTextPassWord);
-        editTextPassword= findViewById(R.id.editTextRePassword);
+        viewText_Register = findViewById(R.id.textView_Register);
+        btn_login = findViewById(R.id.btn_login);
+        editTextName = findViewById(R.id.editTextPassWord);
+        editTextPassword = findViewById(R.id.editTextRePassword);
 
         dialog = new ProgressDialog(this);
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         intitListener();
 
 
-        Intent intent = new Intent(this,RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         viewText_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void intitListener(){
+    private void intitListener() {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,15 +64,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(email)) {
                     editTextName.setError("Vui lòng điền email");
                     return;
-                }
-                else if (TextUtils.isEmpty(passWord)) {
+                } else if (TextUtils.isEmpty(passWord)) {
                     editTextPassword.setError("Vui lòng điền mật khẩu");
                     return;
-                }else{
+                } else {
                     dialog.show();
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                    db.collection("User").whereEqualTo("Email",email)
+                    db.collection("User").whereEqualTo("Email", email)
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -80,13 +79,13 @@ public class LoginActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     if (task.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            if(!(document.getString("PassWord").equals(passWord))){
+                                            if (!(document.getString("PassWord").equals(passWord))) {
                                                 Toast.makeText(LoginActivity.this, "Sai mật khẩu! ", Toast.LENGTH_SHORT).show();
                                                 return;
-                                            } else if(document.getString("Email").equals(email) && (document.getString("PassWord").equals(passWord))){
-                                                Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                            } else if (document.getString("Email").equals(email) && (document.getString("PassWord").equals(passWord))) {
+                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 
-                                                Users users = new Users(document.getId(),document.getString("Email"),document.getString("Avatar"));
+                                                Users users = new Users(document.getId(), document.getString("Email"), document.getString("Avatar"));
                                                 DataLocalManager.setUser(users);
 
                                                 startActivity(intent);
@@ -94,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 break;
                                             }
                                         }
-                                    }else{
+                                    } else {
                                         Toast.makeText(LoginActivity.this, "Email or PassWord incorrect! ", Toast.LENGTH_SHORT).show();
                                         return;
                                     }

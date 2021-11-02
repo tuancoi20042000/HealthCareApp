@@ -117,10 +117,10 @@ public class ListItemActivity extends AppCompatActivity {
                                 Toast.makeText(ListItemActivity.this, "Home", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.action_cart:
-                                if(user != null){
+                                if (user != null) {
                                     Intent intent1 = new Intent(ListItemActivity.this, ListOrderActivity.class);
                                     startActivity(intent1);
-                                }else{
+                                } else {
                                     Toast.makeText(ListItemActivity.this, "Bạn phải đăng nhập để xem giỏ hàng :)", Toast.LENGTH_SHORT).show();
                                 }
                                 break;

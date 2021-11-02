@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ErrorActivity extends AppCompatActivity {
     private TextView btTryAgain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +23,12 @@ public class ErrorActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(ErrorActivity.this.CONNECTIVITY_SERVICE);
-                if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState()== NetworkInfo.State.CONNECTED||
-                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()== NetworkInfo.State.CONNECTED){
+                if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                        connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                     Intent intent = new Intent(ErrorActivity.this, HomeActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    Toast.makeText(ErrorActivity.this, "Vui lòng kiểm tra lại mạng",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ErrorActivity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
                 }
             }
         });

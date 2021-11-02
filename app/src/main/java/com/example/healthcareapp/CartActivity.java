@@ -29,7 +29,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +83,7 @@ public class CartActivity extends AppCompatActivity {
                     getSumMon();
 
                 } else {
-                    Toast.makeText(CartActivity.this,"Bạn chưa chọn sản phẩm nào.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Bạn chưa chọn sản phẩm nào.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -92,16 +91,16 @@ public class CartActivity extends AppCompatActivity {
         btMuahang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (chonAll.isChecked() && listCart.size()>0) {
+                if (chonAll.isChecked() && listCart.size() > 0) {
                     getSumMon();
                     Intent intent = new Intent(CartActivity.this, OrderDetailActivity.class);
-                    intent.putExtra("shipAddress",txtDiaChi.getText().toString());
-                    intent.putExtra("sumMoney",sumMoney.getText().toString());
+                    intent.putExtra("shipAddress", txtDiaChi.getText().toString());
+                    intent.putExtra("sumMoney", sumMoney.getText().toString());
 
-                    Log.d("TAG", "onClick: "+sumMoney.getText().toString());
+                    Log.d("TAG", "onClick: " + sumMoney.getText().toString());
                     startActivity(intent);
                 } else {
-                    Toast.makeText(CartActivity.this,"Bạn chưa chọn sản phẩm nào.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Bạn chưa chọn sản phẩm nào.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -167,7 +166,7 @@ public class CartActivity extends AppCompatActivity {
         for (Cart ca : listCart) {
             sumMon += ca.getNumOfQuan() * ca.getProduct().getpPrice();
         }
-        String numberFormat = String.format("%.2f",sumMon);
+        String numberFormat = String.format("%.2f", sumMon);
         sumMoney.setText(numberFormat);
     }
 

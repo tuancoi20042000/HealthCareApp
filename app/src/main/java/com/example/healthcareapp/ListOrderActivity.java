@@ -1,33 +1,27 @@
 package com.example.healthcareapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.healthcareapp.adapter.OrderListAdapter;
 import com.example.healthcareapp.data_local.DataLocalManager;
 import com.example.healthcareapp.model.Order;
 import com.example.healthcareapp.model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ListOrderActivity extends AppCompatActivity {
     CollectionReference collectionReference;
@@ -35,6 +29,7 @@ public class ListOrderActivity extends AppCompatActivity {
     ArrayList<Order> listOrder;
     Users user = DataLocalManager.getUsers();
     OrderListAdapter adapter;
+    ImageView imgBack;
     RecyclerView recyclerView;
 
     @Override
@@ -43,9 +38,15 @@ public class ListOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_order);
         firestore = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.listOrderView);
-
+        imgBack = findViewById(R.id.imageBack);
         listOrder = new ArrayList<>();
         getListOrder();
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getListOrder() {

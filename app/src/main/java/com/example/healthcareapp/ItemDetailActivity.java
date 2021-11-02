@@ -91,13 +91,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             textView10.setVisibility(View.INVISIBLE);
         }
 
-        // Add to cart
-        btAddtoCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         // Increase number to buy
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override

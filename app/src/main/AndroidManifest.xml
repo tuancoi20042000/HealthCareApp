@@ -35,7 +35,6 @@
         </activity>
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".ChatBotActivity" />
-        <activity android:name=".DempFireBaseActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SplashActivity" >

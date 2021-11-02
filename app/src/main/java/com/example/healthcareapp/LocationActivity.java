@@ -16,6 +16,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -54,9 +55,10 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap mMap;
     private ActivityLocationBinding binding;
-    double lat = 0,lng = 0;
+    double lat = 0, lng = 0;
     FusedLocationProviderClient fusedLocationProviderClient;
     Button hospital, medicine;
+    ImageView imgBackLocation;
     FirebaseFirestore firestore;
 
     @Override
@@ -86,7 +88,14 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         hospital = findViewById(R.id.bt_search_hospital1);
         medicine = findViewById(R.id.bt_search_medicine_shop1);
-
+        imgBackLocation = findViewById(R.id.imgbackLocation);
+        imgBackLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LocationActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +121,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 h.setLng(lg1);
                                 h.setLat(lat1);
                                 h.setPhone(phone);
-                                h.setDistance(distance*1000000000);
+                                h.setDistance(distance * 1000000000);
                                 listHospital.add(h);
                             }
                             Collections.sort(listHospital);
@@ -126,7 +135,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                     .title(ho.getName()));
 
                         }
-                        controlCam(new LatLng(listHospital.get(0).getLat(),listHospital.get(0).getLng()));
+                        controlCam(new LatLng(listHospital.get(0).getLat(), listHospital.get(0).getLng()));
 
                     }
 
@@ -158,8 +167,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 ph.setName(name);
                                 ph.setLng(lg1);
                                 ph.setLat(lat1);
-                                ph.setDistance(distance*1000000000);
-                                Log.d("TAG", "onComplete Distance: "+distance);
+                                ph.setDistance(distance * 1000000000);
+                                Log.d("TAG", "onComplete Distance: " + distance);
                                 listPharma.add(ph);
                             }
                             Collections.sort(listPharma);
@@ -173,7 +182,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                     .title(ho.getName() + "\n"));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HosLocation, 12));
                         }
-                        controlCam(new LatLng(listPharma.get(0).getLat(),listPharma.get(0).getLng()));
+                        controlCam(new LatLng(listPharma.get(0).getLat(), listPharma.get(0).getLng()));
 
                     }
 
@@ -206,27 +215,27 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     public void getCurrentLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override
                 public void onComplete(@NonNull Task<Location> task) {
                     Location location = task.getResult();
-                    if(location != null){
+                    if (location != null) {
                         lat = location.getLatitude();
                         lng = location.getLongitude();
-                        Log.d("TAG", "onComplete: lat = "+lat+" lng = "+lng);
+                        Log.d("TAG", "onComplete: lat = " + lat + " lng = " + lng);
 
-                        LatLng currentLocation = new LatLng(lat,lng);
-                        Log.d("TAG", "onMapReady: "+lat+lng);
+                        LatLng currentLocation = new LatLng(lat, lng);
+                        Log.d("TAG", "onMapReady: " + lat + lng);
                         mMap.addMarker(new MarkerOptions()
-                                    .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_location_on_24))
+                                .icon(bitmapDescriptorFromVector(LocationActivity.this, R.drawable.ic_baseline_location_on_24))
                                 .position(currentLocation)
                                 .title("Here"));
-                        Log.d("TAG", "onMapReady: "+currentLocation.longitude);
+                        Log.d("TAG", "onMapReady: " + currentLocation.longitude);
                         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,17));
-                    }else{
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 17));
+                    } else {
                         LocationRequest locationRequest = new LocationRequest()
                                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                                 .setInterval(10000)
@@ -239,19 +248,20 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                                 Location location1 = locationResult.getLastLocation();
                                 lat = location1.getLatitude();
                                 lng = location1.getLongitude();
-                                Log.d("TAG", "onLocationResult: lat = "+lat+" lng = "+lng);
+                                Log.d("TAG", "onLocationResult: lat = " + lat + " lng = " + lng);
                             }
                         };
                         fusedLocationProviderClient.requestLocationUpdates(locationRequest
-                                ,locationCallback, Looper.myLooper());
+                                , locationCallback, Looper.myLooper());
                     }
                 }
             });
-        }else{
+        } else {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
     }
+
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
@@ -260,7 +270,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
-    public void controlCam(LatLng latlg){
+
+    public void controlCam(LatLng latlg) {
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(latlg)      // Sets the center of the map to Mountain View

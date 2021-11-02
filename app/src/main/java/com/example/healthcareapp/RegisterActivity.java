@@ -25,8 +25,8 @@ import java.util.Random;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button btn_Register;
-    private EditText editTextEmail , editTextPassWord , editTextRePassword , editTextPhone;
-    private ProgressDialog dialog ;
+    private EditText editTextEmail, editTextPassWord, editTextRePassword, editTextPhone;
+    private ProgressDialog dialog;
     private TextView editText_Login;
 
 
@@ -35,19 +35,19 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        btn_Register =  findViewById(R.id.btn_Register);
-        editTextEmail= findViewById(R.id.editTextEmail);
-        editTextPassWord= findViewById(R.id.editTextPassWord);
-        editTextRePassword=findViewById(R.id.editTextRePassword);
-        editTextPhone=findViewById(R.id.editTextPhone);
-        editText_Login=findViewById(R.id.textView_Login);
+        btn_Register = findViewById(R.id.btn_Register);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassWord = findViewById(R.id.editTextPassWord);
+        editTextRePassword = findViewById(R.id.editTextRePassword);
+        editTextPhone = findViewById(R.id.editTextPhone);
+        editText_Login = findViewById(R.id.textView_Login);
 
         dialog = new ProgressDialog(this);
 
         editText_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -65,22 +65,22 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(passWord)) {
                     editTextPassWord.setError("PassWord is Required!");
                     return;
-                } else if(!passWord.equals(rePassWord)){
+                } else if (!passWord.equals(rePassWord)) {
                     editTextRePassword.setError("Not match PassWord!");
-                }else if(phone.length() < 10){
+                } else if (phone.length() < 10) {
                     editTextPhone.setError("Phone must 10 digits!");
-                }else{
+                } else {
                     dialog.show();
                     FirebaseFirestore fb = FirebaseFirestore.getInstance();
                     Map<String, Object> user = new HashMap<>();
-                    Random random =new Random();
-                    int number =random.nextInt()+1;
-                    String ID="HE"+number;
-                    user.put("UserID",ID);
+                    Random random = new Random();
+                    int number = random.nextInt() + 1;
+                    String ID = "HE" + number;
+                    user.put("UserID", ID);
                     user.put("Email", email);
                     user.put("PassWord", passWord);
                     user.put("Phone", phone);
-                    user.put("Avatar","");
+                    user.put("Avatar", "");
 
                     fb.collection("User")
                             .add(user)

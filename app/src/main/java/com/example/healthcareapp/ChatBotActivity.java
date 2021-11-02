@@ -1,5 +1,6 @@
 package com.example.healthcareapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +33,13 @@ public class ChatBotActivity extends AppCompatActivity {
     private EditText userMsgEdt;
     private final String USER_KEY = "user";
     private final String BOT_KEY = "bot";
+    ImageView imgBackChatBot;
     //creating a variable for our volley request queue.
     private RequestQueue mRequestQueue;
     //creating a variable for array list and adapter class.
     private ArrayList<ChatBot> messageModalArrayList;
     private ChatBotAdapter messageRVAdapter;
-    private static String baseUrl ="http://api.brainshop.ai/get?bid=160552&key=xZawVlXB7QeNUpcy&uid=[uid]&msg=";
+    private static String baseUrl = "http://api.brainshop.ai/get?bid=160552&key=xZawVlXB7QeNUpcy&uid=[uid]&msg=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class ChatBotActivity extends AppCompatActivity {
         mRequestQueue.getCache().clear();
         //creating a new array list
         messageModalArrayList = new ArrayList<>();
-
+        imgBackChatBot = findViewById(R.id.imgBackChatBot);
 
         messageRVAdapter = new ChatBotAdapter(messageModalArrayList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatBotActivity.this, RecyclerView.VERTICAL, false);
@@ -69,12 +71,19 @@ public class ChatBotActivity extends AppCompatActivity {
 
             }
         });
+        imgBackChatBot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatBotActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void sendMessage(String userMsg) {
         messageModalArrayList.add(new ChatBot(userMsg, USER_KEY));
         messageRVAdapter.notifyDataSetChanged();
-        String url = baseUrl+ userMsg+"]";
+        String url = baseUrl + userMsg + "]";
         RequestQueue queue = Volley.newRequestQueue(ChatBotActivity.this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -83,7 +92,7 @@ public class ChatBotActivity extends AppCompatActivity {
                     String botResponse = response.getString("cnt");
                     messageModalArrayList.add(new ChatBot(botResponse, BOT_KEY));
                     messageRVAdapter.notifyDataSetChanged();
-                    chatsRV.scrollToPosition(messageModalArrayList.size()-1);
+                    chatsRV.scrollToPosition(messageModalArrayList.size() - 1);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

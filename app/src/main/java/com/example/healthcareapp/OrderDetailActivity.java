@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,6 +41,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     private TextView btConfirm, orderCodeView, txtTime, txtUserName, txtUserPhone, txtUserAddress, txtSumMoney;
     private String shipTime, shipAddress, orderCode, userPhoneNumber, userName;
     private Double orderAmount;
+    String newOrderAmount;
     Users user = DataLocalManager.getUsers();
 
     @Override
@@ -50,7 +50,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_detail);
 
         shipAddress = getIntent().getStringExtra("shipAddress");
-        orderAmount = Double.parseDouble(getIntent().getStringExtra("sumMoney"));
+       // orderAmount = Double.parseDouble(getIntent().getStringExtra("sumMoney"));
+        newOrderAmount = getIntent().getStringExtra("sumMoney");
         orderCode = user.getId() + String.valueOf(System.currentTimeMillis());
 
         firestore = FirebaseFirestore.getInstance();
@@ -165,7 +166,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         txtSumMoney = findViewById(R.id.txtTongSoTien);
 
         txtUserAddress.setText(shipAddress);
-        txtSumMoney.setText(orderAmount.toString());
+        //txtSumMoney.setText(orderAmount.toString());
+        txtSumMoney.setText(newOrderAmount);
         orderCodeView.setText(orderCode);
     }
 

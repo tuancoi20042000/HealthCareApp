@@ -35,28 +35,28 @@ public class TopProductAdapter extends RecyclerView.Adapter<TopProductAdapter.Pr
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_order,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.top_order, parent, false);
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = mListProduct.get(position);
-        if(product==null){
+        if (product == null) {
             return;
         }
         //holder.pImage.setImageResource(product.getpImage());
         Glide.with(holder.itemView.getContext())
                 .load(product.getpImage())
                 .into(holder.pImage);
-        holder.pName.setText(product.getpName().substring(0,12));
-        holder.pPrice.setText("$"+product.getpPrice());
+        holder.pName.setText(product.getpName().substring(0, 12));
+        holder.pPrice.setText("$" + product.getpPrice());
     }
 
 
     @Override
     public int getItemCount() {
-        if (mListProduct!= null){
+        if (mListProduct != null) {
             return mListProduct.size();
         }
         return 0;
@@ -67,6 +67,7 @@ public class TopProductAdapter extends RecyclerView.Adapter<TopProductAdapter.Pr
         private TextView pName;
         private TextView pPrice;
         private CardView topPro;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             pImage = itemView.findViewById(R.id.topPimage);
@@ -85,7 +86,6 @@ public class TopProductAdapter extends RecyclerView.Adapter<TopProductAdapter.Pr
         }
 
     }
-
 
 
 }
