@@ -62,16 +62,17 @@ public class LoginActivity extends AppCompatActivity {
                 String email = editTextName.getText().toString().trim().trim();
                 String passWord = editTextPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    editTextName.setError("Email is Required");
+                    editTextName.setError("Vui lòng điền email");
                     return;
                 }
                 else if (TextUtils.isEmpty(passWord)) {
-                    editTextPassword.setError("PassWord is Required");
+                    editTextPassword.setError("Vui lòng điền mật khẩu");
                     return;
                 }else{
                     dialog.show();
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    db.collection("User")
+
+                    db.collection("User").whereEqualTo("Email",email)
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -79,7 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     if (task.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            if(document.getString("Email").equals(email) && (document.getString("PassWord").equals(passWord))){
+                                            if(!(document.getString("PassWord").equals(passWord))){
+                                                Toast.makeText(LoginActivity.this, "Sai mật khẩu! ", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            } else if(document.getString("Email").equals(email) && (document.getString("PassWord").equals(passWord))){
                                                 Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
 
                                                 Users users = new Users(document.getId(),document.getString("Email"),document.getString("Avatar"));
@@ -87,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 startActivity(intent);
                                                 finish();
+                                                break;
                                             }
                                         }
                                     }else{
