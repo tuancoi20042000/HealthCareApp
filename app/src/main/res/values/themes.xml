@@ -3,9 +3,9 @@
     <style name="Theme.HealthCareApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowFullscreen">true</item>-->
         <item name="colorPrimary">#2196F3</item>
-        <item name="colorPrimaryVariant">#FF9800</item>
+        <item name="colorPrimaryVariant">#03A9F4</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
